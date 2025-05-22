@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>축구 규칙 소개</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .navbar {
+      background-color: #2c6e49;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .navbar a {
+      color: white;
+      font-size: 18px;
+      text-decoration: none;
+      margin: 0 15px;
+      padding: 10px;
+    }
+
+    .navbar a.active {
+      background-color: #ffffff;
+      color: #2c6e49;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .navbar a:hover {
+      background-color: #1f4e32;
+      border-radius: 5px;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .rule-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .rule-menu button {
+      background-color: #2c6e49;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .rule-menu button:hover {
+      background-color: #1f4e32;
+    }
+
+    .rule-menu button.active {
+      background-color: #ffffff;
+      color: #2c6e49;
+      font-weight: bold;
+      border: 2px solid #2c6e49;
+    }
+
+    .rule-display {
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .rule-image {
+      max-width: 100%;
+      margin-top: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 네비게이션 -->
+  <div class="navbar">
+    <a href="now_time_squad.html">현재 국가대표 라인업</a>
+    <a href="all_time_squad.html">역대 국가대표 라인업</a>
+    <a href="football_rules.html" class="active">축구 규칙 소개</a>
+  </div>
+
+  <!-- 콘텐츠 영역 -->
+  <div class="content">
+    <h1 style="text-align: center; color: #2c6e49;">축구 규칙 소개</h1>
+
+    <div class="rule-menu">
+      <button onclick="showRule(this, 'players')">경기 인원</button>
+      <button onclick="showRule(this, 'time')">경기 시간</button>
+      <button onclick="showRule(this, 'goal')">골</button>
+      <button onclick="showRule(this, 'offside')">오프사이드</button>
+      <button onclick="showRule(this, 'foul')">반칙과 경고</button>
+      <button onclick="showRule(this, 'restart')">코너킥/프리킥/페널티킥</button>
+    </div>
+
+    <div class="rule-display" id="ruleDisplay">
+      아래 항목 중 하나를 클릭하면 설명과 이미지가 표시됩니다.
+    </div>
+  </div>
+
+  <script>
+    const rules = {
+      players: {
+        text: "각 팀은 11명의 선수로 구성됩니다. 이 중 1명은 골키퍼이며, 규정에 따라 최소 7명 이상이 경기장에 있어야 합니다.",
+        image: "soccer_players.jpg"
+      },
+      time: {
+        text: "경기는 전반 45분, 후반 45분 총 90분으로 구성되며, 필요 시 추가 시간과 연장전이 주어질 수 있습니다.",
+        image: "time.jpg"
+      },
+      goal: {
+        text: "공이 골라인을 완전히 넘어야 골로 인정됩니다. 상대편 골문 안으로 들어간 경우만 득점으로 인정됩니다.",
+        image: "goals.jpg"
+      },
+      offside: {
+        text: "공격수가 상대 수비보다 앞서 있고, 공격 상황에 관여할 경우 오프사이드가 선언됩니다.",
+        image: "off_side.png"
+      },
+      foul: {
+        text: "거친 태클, 핸드볼, 비신사적 행위 등은 반칙으로 간주되며, 심각도에 따라 경고(옐로 카드) 또는 퇴장(레드 카드)가 주어집니다.",
+        image: "foul.jpg"
+      },
+      restart: {
+        text: "코너킥은 공이 골라인을 넘어간 후 수비 팀이 마지막으로 건드린 경우, 프리킥은 반칙 발생 시, 페널티킥은 페널티 지역 내 반칙 시 주어집니다.",
+        image: "restart.jpg"
+      }
+    };
+
+    function showRule(button, key) {
+      // 버튼 스타일 처리
+      document.querySelectorAll('.rule-menu button').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      // 텍스트와 이미지 표시
+      const display = document.getElementById("ruleDisplay");
+      display.innerHTML = `
+        <p>${rules[key].text}</p>
+        <img src="${rules[key].image}" alt="${key}" class="rule-image">
+      `;
+    }
+  </script>
+</body>
+</html>
