@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>대한민국 축구 포털</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-image: url('main2.jpg');
+    background-size: cover;         /* 화면에 맞게 확대/축소 */
+    background-position: center;    /* 중앙 정렬 */
+    background-repeat: no-repeat;   /* 반복 금지 */
+    background-attachment: fixed;   /* 스크롤 시 고정 배경 */
+  }
+</style>
+
+    
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- 상단 네비게이션 바 -->
+  <header class="bg-white shadow-md px-4 py-3 sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-green-600">⚽ K-Football</h1>
+      <nav class="space-x-6 text-gray-700 font-medium">
+        <a href="#" class="hover:text-green-600">뉴스</a>
+        <a href="#" class="hover:text-green-600">경기일정</a>
+        <a href="#" class="hover:text-green-600">선수</a>
+        <a href="#" class="hover:text-green-600">기록</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 메인 콘텐츠 -->
+  <main class="max-w-7xl mx-auto mt-6 px-4 space-y-8">
+
+    <!-- 뉴스 & 목록 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- 뉴스 -->
+      <section class="md:col-span-2 bg-white p-6 rounded-lg shadow border border-gray-300">
+        <h2 class="text-xl font-semibold border-b pb-2 mb-4">⚽ 축구 관련 뉴스</h2>
+        <ul id="news-list" class="space-y-3 text-gray-800 text-sm list-disc list-inside">
+          <!-- 자바스크립트로 추가됨 -->
+        </ul>
+      </section>
+
+      <!-- 목록 사이드바 -->
+      <aside class="bg-white p-6 rounded-lg shadow border border-gray-300">
+        <h2 class="text-xl font-semibold border-b pb-2 mb-4">📋 목록</h2>
+        <ul class="space-y-2 text-gray-700 text-sm">
+          <li>⚡ 오늘의 경기</li>
+          <li><a href="now_time_squad.html">🧍 주요 선수 명단</a></li>
+          <li>🏆 월드컵 기록</li>
+        </ul>
+      </aside>
+
+    </div>
+
+    <!-- 투표 카드 -->
+    <section class="bg-white p-6 rounded-lg shadow border border-gray-300">
+      <h2 class="text-xl font-semibold border-b pb-2 mb-4">📊 대한민국 축구 예정 경기 예측 투표</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x border border-gray-300 text-center text-sm sm:text-base">
+        <div onclick="vote('win')" class="p-6 hover:bg-green-50 cursor-pointer">
+          <p id="percent-win" class="text-2xl font-bold text-green-600">51%</p>
+          <p class="mt-2">승</p>
+        </div>
+        <div onclick="vote('draw')" class="p-6 hover:bg-yellow-50 cursor-pointer">
+          <p id="percent-draw" class="text-2xl font-bold text-yellow-600">9%</p>
+          <p class="mt-2">무</p>
+        </div>
+        <div onclick="vote('lose')" class="p-6 hover:bg-red-50 cursor-pointer">
+          <p id="percent-lose" class="text-2xl font-bold text-red-600">40%</p>
+          <p class="mt-2">패</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 자바스크립트 -->
+  <script>
+    // 뉴스 목록
+    const newsData = [
+      "손흥민, 프리미어리그 15호 골로 승리 견인",
+      "대한민국, 아시안컵 8강 진출 확정",
+      "KFA, 신임 국가대표 감독에 박지성 선임",
+      "U20 대표팀, 브라질과 극적인 무승부"
+    ];
+
+    // 뉴스 삽입
+    const newsList = document.getElementById("news-list");
+    newsData.forEach(news => {
+      const li = document.createElement("li");
+      li.textContent = news;
+      newsList.appendChild(li);
+    });
+
+    // 투표 처리
+    const votes = { win: 51, draw: 9, lose: 40 };
+
+    function vote(type) {
+      votes[type]++;
+      const total = votes.win + votes.draw + votes.lose;
+      document.getElementById("percent-win").textContent = Math.round((votes.win / total) * 100) + "%";
+      document.getElementById("percent-draw").textContent = Math.round((votes.draw / total) * 100) + "%";
+      document.getElementById("percent-lose").textContent = Math.round((votes.lose / total) * 100) + "%";
+    }
+  </script>
+
+</body>
+</html>
